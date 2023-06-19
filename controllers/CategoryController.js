@@ -1,0 +1,64 @@
+const { Category } = require("../models/models");
+const ApiError = require("../error/ApiError");
+
+class CategoryController {
+  async createCategory(req, res, next) {
+    try {
+      const { title } = req.body;
+      if (!title) {
+        return next(ApiError.badRequest("Title is not defined"));
+      }
+      const category = await Category.create({ title });
+      return res.json(category);
+    } catch (e) {
+      next(ApiError.badRequest(e.message))
+    }
+  }
+  async getAllCategories(req, res, next) {
+    try {
+      const categories = await Category.findAll({ order: [["title", "desc"]] });
+      return res.json(categories);
+    } catch (e) {
+      next(ApiError.badRequest(e.message))
+    }
+  }
+  async getOneCategory(req, res, next) {
+    try {
+      const { id } = req.params;
+      if (!id) {
+        return next(ApiError.badRequest("Id is not defined"));
+      }
+      const category = await Category.findAll({ where: { id } });
+      return res.json(category);
+    } catch (e) {
+      next(ApiError.badRequest(e.message))
+    }
+  }
+  async updateCategory(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { title } = req.body;
+      if (!id || !title) {
+        return next(ApiError.badRequest("Id or title is not defined"));
+      }
+      const category = await Category.update({ title }, { where: { id } });
+      return res.json(category);
+    } catch (e) {
+      next(ApiError.badRequest(e.message))
+    }
+  }
+  async deleteCategory(req, res, next) {
+    try {
+      const { id } = req.params;
+      if (!id) {
+        return next(ApiError.badRequest("Id is not defined"));
+      }
+      const category = await Category.destroy({ where: { id } });
+      return res.json(category);
+    } catch (e) {
+      next(ApiError.badRequest(e.message))
+    }
+  }
+}
+
+module.exports = new CategoryController();
