@@ -3,8 +3,13 @@ const router = new Router()
 const itemController = require('../controllers/ItemController')
 
 router.post('/', itemController.addItem)
+router.post('/changecategory', itemController.addToSubCategory)
 router.get('/', itemController.getAllItems)
 router.get('/:id', itemController.getOneItem)
-router.delete('/:id', itemController.deleteItem)
+router.post('/delete', itemController.deleteItems)
+router.post('/prom', itemController.addToProm)
+router.post('/pop', itemController.addToPop)
+router.get('/prom/item', itemController.getAllPromItems)
+router.get('/pop/item', itemController.getAllPopItems)
 
 module.exports = router

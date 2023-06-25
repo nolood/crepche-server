@@ -37,6 +37,16 @@ const Subcategory = sequelize.define('subcategory', {
   title: { type: DataTypes.STRING, unique: true, allowNull: false },
 })
 
+const PopItem = sequelize.define('popItem', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  items: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false }
+});
+
+const PromItem = sequelize.define('promItem', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  items: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false }
+});
+
 User.belongsToMany(Role, { through: 'UserRole' })
 Role.belongsToMany(User, { through: 'UserRole' })
 
@@ -55,6 +65,7 @@ BasketItem.belongsTo(Item)
 Item.belongsTo(Category)
 Item.belongsTo(Subcategory)
 
+
 module.exports = {
   User,
   Basket,
@@ -63,4 +74,6 @@ module.exports = {
   Category,
   Subcategory,
   Role,
+  PopItem,
+  PromItem
 }

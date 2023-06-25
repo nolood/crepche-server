@@ -2,24 +2,24 @@ const { Category } = require("../models/models");
 const ApiError = require("../error/ApiError");
 
 class CategoryController {
-  async createCategory(req, res, next) {
+  async createCategory(req, res) {
     try {
       const { title } = req.body;
       if (!title) {
-        return next(ApiError.badRequest("Title is not defined"));
+        return res.status(404).json({ message: 'Title undefined' })
       }
       const category = await Category.create({ title });
       return res.json(category);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      return res.status(404).json(e)
     }
   }
-  async getAllCategories(req, res, next) {
+  async getAllCategories(req, res) {
     try {
-      const categories = await Category.findAll({ order: [["title", "desc"]] });
+      const categories = await Category.findAll({ order: [["title", "asc"]] });
       return res.json(categories);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      return res.status(404).json(e)
     }
   }
   async getOneCategory(req, res, next) {

@@ -3,25 +3,25 @@ const { Category, Subcategory } = require("../models/models");
 const ApiError = require("../error/ApiError");
 
 class SubCategoryController {
-  async createSubCategory(req, res, next) {
+  async createSubCategory(req, res) {
     try {
       const { categoryId, title } = req.body;
       const category = await Category.findByPk(categoryId);
       if (!category) {
-        return next(ApiError.badRequest("Category not found"));
+        return res.status(404).json({ message: 'Category not found' })
       }
       const subcategory = await Subcategory.create({ title, categoryId });
       return res.json({ subcategory });
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      return res.status(404).json({ message: e.message })
     }
   }
-  async getSubCategories(req, res, next) {
+  async getAllSubCategories(req, res) {
     try {
       const subcategories = await Subcategory.findAll();
       return res.json(subcategories);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      return res.status(404).json({ message: e.message })
     }
   }
   async getOneSubCategory(req, res, next) {
