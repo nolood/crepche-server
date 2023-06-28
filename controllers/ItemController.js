@@ -14,6 +14,23 @@ class ItemController {
     }
   }
 
+  async addItems(req, res) {
+    try {
+      const { items } = req.body;
+      for (const item of items) {
+        await Item.create({
+          title: item.title,
+          price: item.price,
+          pack: item.pack,
+          img: fileName,
+        });
+      }
+      return res.status(200).json({ message: "success" });
+    } catch (e) {
+      return res.status(404).json({ message: e });
+    }
+  }
+
   async getAllItems(req, res, next) {
     try {
       let { categoryId, subCategoryId, limit, page, all } = req.query;
