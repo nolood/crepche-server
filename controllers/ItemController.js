@@ -93,7 +93,7 @@ class ItemController {
 
   async addToSubCategory(req, res) {
     try {
-      const { subCategoryId, items, categoryId } = req.query;
+      const { subCategoryId, items, categoryId } = req.body;
       const { img } = req.files;
       let fileName = uuid.v4() + ".webp";
       img.mv(path.resolve(__dirname, "..", "static", fileName));
