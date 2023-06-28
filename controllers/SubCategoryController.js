@@ -5,15 +5,15 @@ const ApiError = require("../error/ApiError");
 class SubCategoryController {
   async createSubCategory(req, res) {
     try {
-      const { categoryId, title } = req.body;
+      const { categoryId, title } = req.query;
       const category = await Category.findByPk(categoryId);
       if (!category) {
-        return res.status(404).json({ message: 'Category not found' })
+        return res.status(404).json({ message: "Category not found" });
       }
       const subcategory = await Subcategory.create({ title, categoryId });
       return res.json({ subcategory });
     } catch (e) {
-      return res.status(404).json({ message: e.message })
+      return res.status(404).json({ message: e.message });
     }
   }
   async getAllSubCategories(req, res) {
@@ -21,19 +21,19 @@ class SubCategoryController {
       const subcategories = await Subcategory.findAll();
       return res.json(subcategories);
     } catch (e) {
-      return res.status(404).json({ message: e.message })
+      return res.status(404).json({ message: e.message });
     }
   }
   async getOneSubCategory(req, res, next) {
     try {
       const { id } = req.params;
-			if (!id) {
-				next(ApiError.badRequest('Id is not defined'))
-			}
+      if (!id) {
+        next(ApiError.badRequest("Id is not defined"));
+      }
       const subcategory = await Subcategory.findAll({ where: { id } });
       return res.json(subcategory);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.badRequest(e.message));
     }
   }
   async updateSubCategory(req, res, next) {
@@ -49,7 +49,7 @@ class SubCategoryController {
       );
       return res.json(subcategory);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.badRequest(e.message));
     }
   }
   async deleteSubCategory(req, res, next) {
