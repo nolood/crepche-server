@@ -4,14 +4,14 @@ const ApiError = require("../error/ApiError");
 class CategoryController {
   async createCategory(req, res) {
     try {
-      const { title } = req.body;
+      const { title } = req.query;
       if (!title) {
-        return res.status(404).json({ message: 'Title undefined' })
+        return res.status(404).json({ message: "Title undefined" });
       }
       const category = await Category.create({ title });
       return res.json(category);
     } catch (e) {
-      return res.status(404).json(e)
+      return res.status(404).json(e);
     }
   }
   async getAllCategories(req, res) {
@@ -19,7 +19,7 @@ class CategoryController {
       const categories = await Category.findAll({ order: [["title", "asc"]] });
       return res.json(categories);
     } catch (e) {
-      return res.status(404).json(e)
+      return res.status(404).json(e);
     }
   }
   async getOneCategory(req, res, next) {
@@ -31,7 +31,7 @@ class CategoryController {
       const category = await Category.findAll({ where: { id } });
       return res.json(category);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.badRequest(e.message));
     }
   }
   async updateCategory(req, res, next) {
@@ -44,7 +44,7 @@ class CategoryController {
       const category = await Category.update({ title }, { where: { id } });
       return res.json(category);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.badRequest(e.message));
     }
   }
   async deleteCategory(req, res, next) {
@@ -56,7 +56,7 @@ class CategoryController {
       const category = await Category.destroy({ where: { id } });
       return res.json(category);
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.badRequest(e.message));
     }
   }
 }
