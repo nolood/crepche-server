@@ -24,7 +24,7 @@ class CategoryController {
   }
   async getOneCategory(req, res, next) {
     try {
-      const { id } = req.params;
+      const { id } = req.query;
       if (!id) {
         return next(ApiError.badRequest("Id is not defined"));
       }
@@ -36,7 +36,7 @@ class CategoryController {
   }
   async updateCategory(req, res, next) {
     try {
-      const { id } = req.params;
+      const { id } = req.query;
       const { title } = req.body;
       if (!id || !title) {
         return next(ApiError.badRequest("Id or title is not defined"));
@@ -49,7 +49,7 @@ class CategoryController {
   }
   async deleteCategory(req, res, next) {
     try {
-      const { id } = req.params;
+      const { id } = req.query;
       if (!id) {
         return next(ApiError.badRequest("Id is not defined"));
       }
