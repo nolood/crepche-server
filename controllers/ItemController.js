@@ -17,12 +17,14 @@ class ItemController {
   async addItems(req, res) {
     try {
       const { items } = req.body;
-      for (const item of items) {
+      console.log("start items add");
+      for (const item of JSON.parse(items)) {
+        console.log(item.title);
         await Item.create({
           title: item.title,
           price: item.price,
           pack: item.pack,
-          img: fileName,
+          img: "null",
         });
       }
       return res.status(200).json({ message: "success" });
