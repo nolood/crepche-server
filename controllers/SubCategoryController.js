@@ -26,14 +26,14 @@ class SubCategoryController {
   }
   async getSubcategoriesById(req, res) {
     try {
-      const { id } = req.query;
+      const { id } = req.params;
       if (!id) {
         res.status(404).json({ message: "Id is not defined" });
       }
-      const subcategory = await Subcategory.findAll({
+      const subcategories = await Subcategory.findAll({
         where: { categoryId: id },
       });
-      return res.json(subcategory);
+      return res.json(subcategories);
     } catch (e) {
       return res.status(404).json({ message: e.message });
     }
