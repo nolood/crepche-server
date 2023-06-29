@@ -24,16 +24,18 @@ class SubCategoryController {
       return res.status(404).json({ message: e.message });
     }
   }
-  async getOneSubCategory(req, res, next) {
+  async getSubcategoriesById(req, res) {
     try {
       const { id } = req.query;
       if (!id) {
-        next(ApiError.badRequest("Id is not defined"));
+        res.status(404).json({ message: "Id is not defined" });
       }
-      const subcategory = await Subcategory.findAll({ where: { id } });
+      const subcategory = await Subcategory.findAll({
+        where: { categoryId: id },
+      });
       return res.json(subcategory);
     } catch (e) {
-      next(ApiError.badRequest(e.message));
+      return res.status(404).json({ message: e.message });
     }
   }
   async updateSubCategory(req, res, next) {
