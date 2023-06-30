@@ -6,8 +6,16 @@ const ApiError = require("../error/ApiError");
 class ItemController {
   async addItem(req, res) {
     try {
-      const { title, price, pack } = req.query;
-      await Item.create({ title, price, pack, img: fileName });
+      const { items } = req.body;
+      const fileName = "null";
+      for (const item of JSON.parse(items)) {
+        await Item.create({
+          title: item.title,
+          price: item.price,
+          pack: item.pack,
+          img: fileName,
+        });
+      }
       return res.status(200).json({ message: "success" });
     } catch (e) {
       return res.status(404).json({ message: e });

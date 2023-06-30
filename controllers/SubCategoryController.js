@@ -56,7 +56,7 @@ class SubCategoryController {
   }
   async deleteSubCategory(req, res, next) {
     try {
-      const { id } = req.query;
+      const { id } = req.params;
       if (!id) {
         return next(ApiError.badRequest("Id is not defined"));
       }
