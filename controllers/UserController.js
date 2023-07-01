@@ -47,7 +47,7 @@ class UserController {
       const token = generateAccessToken(user.id, user.roles);
       return res.json({ token, message: "success" });
     } catch (e) {
-      next(ApiError.badRequest(e.message));
+      return res.status(404).json(e.message);
     }
   }
 
