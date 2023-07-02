@@ -3,7 +3,7 @@ const { Role, User } = require("../models/models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secret } = require("../config");
-const BasketController = require("./BasketController");
+const { createBasket } = require("./BasketController");
 
 const generateAccessToken = (id, roles) => {
   const payload = {
@@ -28,8 +28,7 @@ class UserController {
         password: hashPassword,
         roles: [userRole.value],
       });
-      const basketControllerInstance = new BasketController();
-      basketControllerInstance.createBasket(req, res);
+      createBasket(user.id, req, res);
       return res.json(user.id);
     } catch (e) {
       return res.status(404).json(e.message);
