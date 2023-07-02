@@ -4,7 +4,7 @@ const ApiError = require("../error/ApiError");
 class BasketController {
   async createBasket(req, res, next) {
     try {
-      const basket = await Basket.create();
+      const basket = await Basket.create({});
       return res.json(basket);
     } catch (e) {
       next(ApiError.badRequest(e.message));

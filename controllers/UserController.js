@@ -27,7 +27,7 @@ class UserController {
         password: hashPassword,
         roles: [userRole.value],
       });
-      return res.json("success");
+      return res.json(user.id);
     } catch (e) {
       return res.status(404).json(e.message);
     }
@@ -52,7 +52,8 @@ class UserController {
   }
 
   async check(req, res, next) {
-    return res.json({ auth: true });
+    const userId = req.user.id;
+    return res.json({ auth: true, userId });
   }
 
   async addRole(req, res) {
