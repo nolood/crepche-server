@@ -78,9 +78,9 @@ class ItemController {
     try {
       const { id } = req.params;
       if (!id) {
-        next(ApiError.badRequest("Id is not defined"));
+        res.status(404).json({ message: "id is not defined" });
       }
-      const item = await Item.findAll({ where: { id } });
+      const item = await Item.findOne({ where: { id } });
       return res.json(item);
     } catch (e) {
       return res.status(404).json({ message: e });
