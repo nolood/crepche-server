@@ -2,18 +2,16 @@ const { Basket, User } = require("../models/models");
 const ApiError = require("../error/ApiError");
 
 class BasketController {
-  async createBasket(req, res, next) {
+  async createBasket(userId, req, res) {
     try {
-      const { userId } = req.query;
       const user = await User.findByPk(userId);
       if (!user) {
         return res.status(404).json({ message: "invalid userId" });
       }
-      const basket = await Basket.create();
-      await user.setBasket(basket);
+      const basket = await Basket.create({ userId });
       return res.json(true);
     } catch (e) {
-      next(ApiError.badRequest(e.message));
+      res.status(404).json(e.message);
     }
   }
 
