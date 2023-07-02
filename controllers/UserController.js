@@ -28,7 +28,6 @@ class UserController {
         password: hashPassword,
         roles: [userRole.value],
       });
-      createBasket(user.id, req, res);
       return res.json(user.id);
     } catch (e) {
       return res.status(404).json(e.message);

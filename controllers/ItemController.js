@@ -76,7 +76,7 @@ class ItemController {
 
   async getOneItem(req, res) {
     try {
-      const { id } = req.query;
+      const { id } = req.params;
       if (!id) {
         next(ApiError.badRequest("Id is not defined"));
       }
