@@ -74,6 +74,20 @@ class ItemController {
     }
   }
 
+  async getItemsById(req, res) {
+    try {
+      const { itemsIds } = req.body;
+      let items = [];
+      for (let id of JSON.parse(itemsIds)) {
+        const item = await Item.findOne({ where: { id } });
+        items.push(item);
+      }
+      return res.json(items);
+    } catch (e) {
+      return res.status(404).json({ message: e });
+    }
+  }
+
   async getOneItem(req, res) {
     try {
       const { id } = req.params;

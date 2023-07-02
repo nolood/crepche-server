@@ -6,6 +6,7 @@ router.post("/", itemController.addItem);
 router.post("/all", itemController.addItems);
 router.post("/changecategory", itemController.addToSubCategory);
 router.get("/", itemController.getAllItems);
+router.get("/ids", itemController.getItemsById);
 router.get("/:id", itemController.getOneItem);
 router.post("/delete", itemController.deleteItems);
 router.post("/prom", itemController.addToProm);
