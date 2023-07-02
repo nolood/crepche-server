@@ -28,7 +28,7 @@ class UserController {
         password: hashPassword,
         roles: [userRole.value],
       });
-      const basketControllerInstance = new basketController();
+      const basketControllerInstance = new BasketController();
       basketControllerInstance.createBasket(req, res);
       return res.json(user.id);
     } catch (e) {
