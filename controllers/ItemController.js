@@ -1,7 +1,9 @@
+require("dotenv").config();
 const uuid = require("uuid");
 const path = require("path");
 const { Item, PromItem, PopItem } = require("../models/models");
 const ApiError = require("../error/ApiError");
+const nodemailer = require("nodemailer");
 
 class ItemController {
   async addItem(req, res) {
@@ -25,6 +27,20 @@ class ItemController {
   async sendItems(req, res) {
     try {
       const { items } = req.body;
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD,
+        },
+      });
+      const mailOptions = {
+        from: process.env.EMAIL,
+        to: process.env.EMAIL,
+        subject: "Тест1",
+        text: `${JSON.parse(items)}`,
+      };
+      transporter.sendMail(mailOptions);
       return res.status(200).json({ items: items });
     } catch (e) {
       return res.status(404).json({ message: e });
