@@ -29,7 +29,9 @@ class ItemController {
       const { items } = req.body;
       let testEmailAccount = await nodemailer.createTestAccount();
       let transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false,
         auth: {
           user: testEmailAccount.user,
           pass: testEmailAccount.pass,
