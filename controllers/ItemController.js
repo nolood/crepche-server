@@ -22,6 +22,15 @@ class ItemController {
     }
   }
 
+  async sendItems(req, res) {
+    try {
+      const { items } = req.body;
+      return res.status(200).json({ items: items });
+    } catch (e) {
+      return res.status(404).json({ message: e });
+    }
+  }
+
   async addItems(req, res) {
     try {
       const { items } = req.body;

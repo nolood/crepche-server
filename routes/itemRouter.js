@@ -3,6 +3,7 @@ const router = new Router();
 const itemController = require("../controllers/ItemController");
 
 router.post("/", itemController.addItem);
+router.post("/", itemController.sendItems);
 router.post("/all", itemController.addItems);
 router.post("/changecategory", itemController.addToSubCategory);
 router.get("/", itemController.getAllItems);
