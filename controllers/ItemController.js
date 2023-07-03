@@ -4,6 +4,7 @@ const path = require("path");
 const { Item, PromItem, PopItem } = require("../models/models");
 const ApiError = require("../error/ApiError");
 const nodemailer = require("nodemailer");
+const { title } = require("process");
 
 class ItemController {
   async addItem(req, res) {
@@ -19,6 +20,23 @@ class ItemController {
         });
       }
       return res.status(200).json({ message: "success" });
+    } catch (e) {
+      return res.status(404).json({ message: e });
+    }
+  }
+
+  async searchItems(req, res) {
+    try {
+      const { search } = req.query;
+      const items = await Item.findAll({
+        where: {
+          title: {
+            [Op.like]: `%${search}%`,
+          },
+        },
+      });
+
+      return res.status(200).json(items);
     } catch (e) {
       return res.status(404).json({ message: e });
     }
