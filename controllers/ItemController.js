@@ -27,11 +27,12 @@ class ItemController {
   async sendItems(req, res) {
     try {
       const { items } = req.body;
+      let testEmailAccount = await nodemailer.createTestAccount();
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.EMAIL,
-          pass: process.env.PASSWORD,
+          user: testEmailAccount.user,
+          pass: testEmailAccount.pass,
         },
       });
       const mailOptions = {
