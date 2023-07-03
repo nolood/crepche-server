@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { Op } = require("sequelize");
 const uuid = require("uuid");
 const path = require("path");
 const { Item, PromItem, PopItem } = require("../models/models");
