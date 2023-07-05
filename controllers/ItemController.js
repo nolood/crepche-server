@@ -150,7 +150,7 @@ class ItemController {
 
   async deleteItems(req, res) {
     try {
-      const { items } = req.query;
+      const { items } = req.body;
       items.map(async (id) => {
         await Item.destroy({ where: { id } });
       });
