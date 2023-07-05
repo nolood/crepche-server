@@ -73,15 +73,23 @@ class ItemController {
     try {
       const { items } = req.body;
       console.log("start items add");
-      for (const item of JSON.parse(items)) {
-        console.log(item.title);
+      items.map(async (item) => {
         await Item.create({
           title: item.title,
           price: item.price,
           pack: item.pack,
           img: "null",
         });
-      }
+      });
+      // for (const item of JSON.parse(items)) {
+      //   console.log(item.title);
+      //   await Item.create({
+      //     title: item.title,
+      //     price: item.price,
+      //     pack: item.pack,
+      //     img: "null",
+      //   });
+      // }
       return res.status(200).json({ message: "success" });
     } catch (e) {
       return res.status(404).json({ message: e });
