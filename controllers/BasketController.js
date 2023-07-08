@@ -18,7 +18,7 @@ class BasketController {
 
   async getItems(req, res) {
     try {
-      const items = Offer.findAll({ order: [["createdAt", "asc"]] });
+      const items = Offer.findAll();
       return res.status(200).json(items);
     } catch (e) {
       return res.status(404).json(e.message);
