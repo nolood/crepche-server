@@ -1,5 +1,4 @@
-const { Basket, User } = require("../models/models");
-const ApiError = require("../error/ApiError");
+const { Offer } = require("../models/models");
 
 class BasketController {
   async sendEmail(req, res) {
