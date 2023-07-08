@@ -17,7 +17,7 @@ const Offer = sequelize.define("offer", {
     type: DataTypes.STRING,
   },
   items: {
-    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER)),
   },
 });
 
