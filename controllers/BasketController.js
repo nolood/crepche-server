@@ -19,7 +19,7 @@ class BasketController {
   async getItems(req, res) {
     try {
       const items = Offer.findAll();
-      return res.json(items);
+      return res.json({ items });
     } catch (e) {
       return res.status(404).json(e.message);
     }
