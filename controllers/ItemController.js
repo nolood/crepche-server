@@ -5,7 +5,6 @@ const path = require("path");
 const { Item, PromItem, PopItem } = require("../models/models");
 const ApiError = require("../error/ApiError");
 const nodemailer = require("nodemailer");
-const { title } = require("process");
 
 class ItemController {
   async addItem(req, res) {
